@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+html-report/
+logs/
+.gauge/
+.vscode/
+.codex/
+.agents/
+*.pyc
+.DS_Store

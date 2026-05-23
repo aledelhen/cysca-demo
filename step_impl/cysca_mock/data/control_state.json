@@ -1,0 +1,20 @@
+{
+  "controller": {
+    "config_version": 2,
+    "health": "healthy",
+    "state": "running",
+    "watchdog": "armed"
+  },
+  "device": {
+    "connection": "connected",
+    "handshake": "accepted",
+    "mode": "standby"
+  },
+  "telemetry": {
+    "audit_sequence": [
+      "command_issued",
+      "command_issued"
+    ],
+    "last_event": "command_issued"
+  }
+}
