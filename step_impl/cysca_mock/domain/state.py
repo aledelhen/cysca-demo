@@ -24,6 +24,7 @@ DEFAULT_STATE = {
 
 
 def load_state():
+    """Load the persisted control state, seeding defaults if needed."""
     raw_state = DATA_FILE.read_text(encoding="utf-8").strip()
     if not raw_state:
         save_state(DEFAULT_STATE)
@@ -32,9 +33,11 @@ def load_state():
 
 
 def save_state(state):
+    """Write the given control state to disk."""
     DATA_FILE.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def reset_state():
+    """Reset the persisted control state back to defaults."""
     save_state(DEFAULT_STATE)
     return json.loads(json.dumps(DEFAULT_STATE))

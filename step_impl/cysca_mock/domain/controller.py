@@ -2,6 +2,7 @@ from .state import load_state, save_state
 
 
 def start_controller():
+    """Initialize the controller as healthy and running."""
     state = load_state()
     state["controller"]["health"] = "healthy"
     state["controller"]["state"] = "running"
@@ -10,6 +11,7 @@ def start_controller():
 
 
 def reload_controller(config_version):
+    """Update the stored controller configuration version."""
     state = load_state()
     state["controller"]["config_version"] = config_version
     state["controller"]["state"] = "reloaded"
@@ -18,6 +20,7 @@ def reload_controller(config_version):
 
 
 def inject_failure():
+    """Mark the controller as degraded and trigger the watchdog."""
     state = load_state()
     state["controller"]["health"] = "degraded"
     state["controller"]["state"] = "faulted"
@@ -27,6 +30,7 @@ def inject_failure():
 
 
 def recover_controller():
+    """Restore the controller to a healthy running state."""
     state = load_state()
     state["controller"]["health"] = "healthy"
     state["controller"]["state"] = "running"

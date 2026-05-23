@@ -33,11 +33,13 @@ if not logger.handlers:
 
 
 def _log(message):
+    """Write a structured message to the project logger."""
     logger.info(message)
 
 
 @step("Start the controller service <boot_mode> <table>")
 def start_the_controller_service(boot_mode, table):
+    """Seed profile data and boot the controller service."""
     global _runtime_state
     global _profile
     _log(f"🚀 Starting controller service in {boot_mode} mode")
@@ -49,6 +51,7 @@ def start_the_controller_service(boot_mode, table):
 
 @step("Verify the service reports healthy <health>")
 def verify_the_service_reports_healthy(health):
+    """Assert the controller reports the requested health state."""
     _log(f"🩺 Verifying controller health is {health}")
     assert _runtime_state["controller"]["health"] == health
     assert_controller_healthy(_runtime_state)
@@ -57,6 +60,7 @@ def verify_the_service_reports_healthy(health):
 
 @step("Verify startup logs contain no errors <log_state>")
 def verify_startup_logs_contain_no_errors(log_state):
+    """Assert startup logs are clean when the scenario expects it."""
     _log(f"🧾 Checking startup logs are {log_state}")
     assert log_state == "clean"
     assert_startup_logs_clean(startup_log_lines())
@@ -65,6 +69,7 @@ def verify_startup_logs_contain_no_errors(log_state):
 
 @step("Connect to the device bridge <device_id> <table>")
 def connect_to_the_device_bridge(device_id, table):
+    """Seed profile data and establish the device handshake."""
     global _runtime_state
     global _profile
     _log(f"🔗 Connecting to device bridge for {device_id}")
@@ -76,6 +81,7 @@ def connect_to_the_device_bridge(device_id, table):
 
 @step("Send a handshake request <mode>")
 def send_a_handshake_request(mode):
+    """Validate that the handshake request uses the trusted mode."""
     _log(f"📨 Sending {mode} handshake request")
     assert mode == "trusted"
     _log("✅ Handshake request sent")
@@ -83,6 +89,7 @@ def send_a_handshake_request(mode):
 
 @step("Verify the device responds with an accepted state <state>")
 def verify_the_device_responds_with_an_accepted_state(state):
+    """Assert the device ended up in the accepted connection state."""
     _log(f"📡 Verifying device state is {state}")
     assert state == "accepted"
     assert_device_accepted(_runtime_state)
@@ -91,6 +98,7 @@ def verify_the_device_responds_with_an_accepted_state(state):
 
 @step("Update the runtime configuration <config_version> <table>")
 def update_the_runtime_configuration(config_version, table):
+    """Persist profile data and reload the controller configuration."""
     global _runtime_state
     global _profile
     _log(f"⚙️ Updating runtime configuration to version {config_version}")
@@ -102,6 +110,7 @@ def update_the_runtime_configuration(config_version, table):
 
 @step("Reload the controller <action>")
 def reload_the_controller(action):
+    """Validate the requested controller reload action."""
     _log(f"🔄 Reloading controller via {action}")
     assert action == "restart"
     _log("✅ Controller reload acknowledged")
@@ -109,6 +118,7 @@ def reload_the_controller(action):
 
 @step("Verify the new configuration is active <config_version>")
 def verify_the_new_configuration_is_active(config_version):
+    """Assert the loaded configuration version is active in state."""
     _log(f"📋 Verifying configuration version {config_version} is active")
     assert_config_active(_runtime_state, int(config_version))
     _log("✅ New configuration is active")
@@ -116,6 +126,7 @@ def verify_the_new_configuration_is_active(config_version):
 
 @step("Verify existing state is preserved <state>")
 def verify_existing_state_is_preserved(state):
+    """Assert controller state was preserved across the reload."""
     _log(f"🧩 Verifying controller state is preserved as {state}")
     assert_state_preserved(_runtime_state, state)
     _log("✅ Existing state preserved")
@@ -123,6 +134,7 @@ def verify_existing_state_is_preserved(state):
 
 @step("Inject a communication failure <failure_type> <table>")
 def inject_a_communication_failure(failure_type, table):
+    """Seed profile data and simulate a controller communication failure."""
     global _runtime_state
     global _profile
     _log(f"⚠️ Injecting communication failure: {failure_type}")
@@ -134,6 +146,7 @@ def inject_a_communication_failure(failure_type, table):
 
 @step("Verify the watchdog detects the failure <status>")
 def verify_the_watchdog_detects_the_failure(status):
+    """Assert the watchdog was triggered by the simulated failure."""
     _log(f"🐕 Verifying watchdog status is {status}")
     assert status == "triggered"
     assert_watchdog_triggered(_runtime_state)
@@ -142,6 +155,7 @@ def verify_the_watchdog_detects_the_failure(status):
 
 @step("Verify the service restarts successfully <state>")
 def verify_the_service_restarts_successfully(state):
+    """Recover the controller and assert it returned to running state."""
     global _runtime_state
     _log(f"♻️ Recovering service to {state}")
     _runtime_state = recover_controller()
@@ -152,6 +166,7 @@ def verify_the_service_restarts_successfully(state):
 
 @step("Trigger an operational command <event_name> <table>")
 def trigger_an_operational_command(event_name, table):
+    """Seed profile data and emit an operational telemetry event."""
     global _runtime_state
     global _profile
     _log(f"📣 Triggering operational command {event_name}")
@@ -163,6 +178,7 @@ def trigger_an_operational_command(event_name, table):
 
 @step("Trigger an operational command <event_name> from <source>")
 def trigger_an_operational_command_from(event_name, source):
+    """Record the event source and emit the operational telemetry event."""
     global _runtime_state
     global _profile
     _log(f"📣 Triggering operational command {event_name} from {source}")
@@ -173,6 +189,7 @@ def trigger_an_operational_command_from(event_name, source):
 
 @step("Verify the telemetry event is emitted as command_issued <event_name>")
 def verify_the_telemetry_event_is_emitted_as_command_issued(event_name):
+    """Assert the telemetry stream recorded the expected event."""
     _log(f"📈 Verifying telemetry event {event_name} was emitted")
     assert_event_emitted(_runtime_state, event_name)
     _log("✅ Telemetry event emitted")
@@ -180,6 +197,7 @@ def verify_the_telemetry_event_is_emitted_as_command_issued(event_name):
 
 @step("Verify the audit trail keeps the same sequence for command_issued <event_name>")
 def verify_the_audit_trail_keeps_the_same_sequence_for_command_issued(event_name):
+    """Assert the audit sequence ends with the expected event."""
     _log(f"🧾 Verifying audit trail sequence for {event_name}")
     assert_audit_sequence(_runtime_state, event_name)
     _log("✅ Audit trail sequence verified")
@@ -187,6 +205,7 @@ def verify_the_audit_trail_keeps_the_same_sequence_for_command_issued(event_name
 
 @step("Verify the telemetry event <event_name> was emitted")
 def verify_the_telemetry_event_was_emitted(event_name):
+    """Assert the telemetry stream recorded the requested event."""
     _log(f"📈 Verifying telemetry event {event_name} was emitted")
     assert_event_emitted(_runtime_state, event_name)
     _log("✅ Telemetry event emitted")
@@ -194,6 +213,7 @@ def verify_the_telemetry_event_was_emitted(event_name):
 
 @step("Verify the telemetry source <source> was recorded")
 def verify_the_telemetry_source_was_recorded(source):
+    """Assert the current profile captured the expected telemetry source."""
     _log(f"🧭 Verifying telemetry source {source} was recorded")
     assert _profile["source"] == source
     _log("✅ Telemetry source recorded")

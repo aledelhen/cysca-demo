@@ -1,0 +1,6 @@
+services:
+  cysca-mock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh -c "export GAUGE_PYTHON_COMMAND=$${GAUGE_PYTHON_COMMAND:-/app/.venv/bin/python} && exec gauge run specs"
