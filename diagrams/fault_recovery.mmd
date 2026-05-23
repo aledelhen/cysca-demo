@@ -1,0 +1,4 @@
+flowchart TD
+    A[Inject communication failure<br/>failure_type: link-drop<br/>watchdog_timeout: 5s] --> B[Watchdog detects failure<br/>status: triggered]
+    B --> C[Service restarts successfully<br/>state: running]
+    C --> D[Fault recovery verified]

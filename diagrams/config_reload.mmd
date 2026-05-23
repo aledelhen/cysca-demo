@@ -1,0 +1,5 @@
+flowchart TD
+    A[Update runtime configuration<br/>config_version: 2<br/>profile_name: ops] --> B[Reload controller<br/>action: restart]
+    B --> C[New configuration is active<br/>version: 2]
+    C --> D[Existing state is preserved<br/>state: reloaded]
+    D --> E[Configuration reload verified]

@@ -1,0 +1,4 @@
+flowchart TD
+    A[Connect to device bridge<br/>device_id: DEV-2048<br/>protocol: unix-socket] --> B[Send handshake request<br/>mode: trusted]
+    B --> C[Device responds with accepted state]
+    C --> D[Device handshake verified]

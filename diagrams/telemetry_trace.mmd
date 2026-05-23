@@ -1,0 +1,8 @@
+flowchart TD
+    A[Trigger operational command<br/>event_name: command_issued<br/>source: operator] --> B[Telemetry event emitted<br/>event_name: command_issued]
+    B --> C[Audit trail keeps same sequence<br/>event_name: command_issued]
+    C --> D[Telemetry order verified]
+
+    E[Trigger operational command<br/>event_name: command_issued<br/>source: operator] --> F[Telemetry event emitted<br/>event_name: command_issued]
+    F --> G[Telemetry source recorded<br/>source: operator]
+    G --> H[Parameterized telemetry flow verified]
