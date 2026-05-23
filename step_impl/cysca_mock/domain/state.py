@@ -4,10 +4,31 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_FILE = BASE_DIR / "data" / "control_state.json"
+DEFAULT_STATE = {
+    "controller": {
+        "config_version": 1,
+        "health": "starting",
+        "state": "booting",
+        "watchdog": "armed",
+    },
+    "device": {
+        "connection": "disconnected",
+        "handshake": "pending",
+        "mode": "standby",
+    },
+    "telemetry": {
+        "audit_sequence": [],
+        "last_event": None,
+    },
+}
 
 
 def load_state():
-    return json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    raw_state = DATA_FILE.read_text(encoding="utf-8").strip()
+    if not raw_state:
+        save_state(DEFAULT_STATE)
+        return json.loads(json.dumps(DEFAULT_STATE))
+    return json.loads(raw_state)
 
 
 def save_state(state):
@@ -15,6 +36,5 @@ def save_state(state):
 
 
 def reset_state():
-    state = load_state()
-    save_state(state)
-    return state
+    save_state(DEFAULT_STATE)
+    return json.loads(json.dumps(DEFAULT_STATE))

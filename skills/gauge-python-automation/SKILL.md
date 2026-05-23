@@ -27,6 +27,8 @@ This project is a Gauge test automation repo. Prefer the existing project struct
 - Do not assume system `python` exists.
 - Prefer the project venv over system Python.
 - When a Gauge run fails, inspect `logs/gauge.log` first.
+- Run specs from the `specs/` directory with `gauge run <spec_name>` when verifying a single spec.
+- If the sandbox blocks Gauge from starting its local API server, rerun the command outside the sandbox rather than changing the spec first.
 - If a runner import fails, fix the project import path or dependency, not the spec first.
 
 ## Step implementation pattern

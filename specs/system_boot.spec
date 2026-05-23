@@ -1,7 +1,10 @@
 # System boot
 
-## Controller starts cleanly
-* Start the controller service
-* Verify the service reports healthy
-* Verify startup logs contain no errors
+Objective: verify the controller boots into a healthy state and produces clean startup logs.
 
+## Controller starts cleanly
+* Start the controller service "normal"
+    | key      | value  |
+    | boot_mode | normal |
+* Verify the service reports healthy "healthy"
+* Verify startup logs contain no errors "clean"

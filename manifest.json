@@ -1,5 +1,8 @@
 {
   "Language": "python",
   "SpecificationDir": "specs",
-  "StepImplementationDir": "step_impl"
+  "StepImplementationDir": "step_impl",
+  "Plugins": [
+    "html-report"
+  ]
 }
