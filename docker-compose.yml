@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /workspace
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
     volumes:

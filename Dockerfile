@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     HOME=/home/go
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl gnupg ca-certificates unzip nodejs npm gosu \
+    && apt-get install -y --no-install-recommends curl gnupg ca-certificates unzip nodejs npm \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g @getgauge/cli
