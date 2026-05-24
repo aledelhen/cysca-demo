@@ -1,40 +1,26 @@
 import logging
-import os
-import sys
-import traceback
 
-try:
-    from getgauge.python import step
-except Exception:
-    print("STEP_IMPL_BOOTSTRAP_IMPORT_FAILURE", file=sys.stderr)
-    traceback.print_exc()
-    raise
+from getgauge.python import step
 
-try:
-    from step_impl.cysca_mock.assertions.controller_assertions import (
-        assert_config_active,
-        assert_controller_healthy,
-        assert_service_recovered,
-        assert_startup_logs_clean,
-        assert_state_preserved,
-        assert_watchdog_triggered,
-    )
-    from step_impl.cysca_mock.assertions.device_assertions import assert_device_accepted
-    from step_impl.cysca_mock.assertions.telemetry_assertions import assert_audit_sequence, assert_event_emitted
-    from step_impl.cysca_mock.domain.controller import inject_failure, recover_controller
-    from step_impl.cysca_mock.helpers.table_utils import table_to_key_values
-    from step_impl.cysca_mock.logs.system_logs import startup_log_lines
-    from step_impl.cysca_mock.workflows.controller_flows import (
-        boot_controller,
-        handshake_device,
-        reload_runtime_config,
-        trigger_operational_command,
-    )
-except Exception:
-    print("STEP_IMPL_BOOTSTRAP_IMPORT_FAILURE", file=sys.stderr)
-    print(f"PYTHONPATH={os.environ.get('PYTHONPATH')}", file=sys.stderr)
-    traceback.print_exc()
-    raise
+from step_impl.cysca_mock.assertions.controller_assertions import (
+    assert_config_active,
+    assert_controller_healthy,
+    assert_service_recovered,
+    assert_startup_logs_clean,
+    assert_state_preserved,
+    assert_watchdog_triggered,
+)
+from step_impl.cysca_mock.assertions.device_assertions import assert_device_accepted
+from step_impl.cysca_mock.assertions.telemetry_assertions import assert_audit_sequence, assert_event_emitted
+from step_impl.cysca_mock.domain.controller import inject_failure, recover_controller
+from step_impl.cysca_mock.helpers.table_utils import table_to_key_values
+from step_impl.cysca_mock.logs.system_logs import startup_log_lines
+from step_impl.cysca_mock.workflows.controller_flows import (
+    boot_controller,
+    handshake_device,
+    reload_runtime_config,
+    trigger_operational_command,
+)
 
 
 _runtime_state = {}
