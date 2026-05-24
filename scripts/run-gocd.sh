@@ -8,3 +8,6 @@ cleanup() {
 trap cleanup EXIT
 
 docker compose up --build --abort-on-container-exit
+
+echo "Post-run report files:"
+find reports -maxdepth 4 -type f 2>/dev/null || true
