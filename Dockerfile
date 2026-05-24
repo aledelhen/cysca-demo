@@ -49,6 +49,7 @@ runner_request_timeout = 30000
 EOF
 RUN HOME=/home/go gauge install python \
     && HOME=/home/go gauge install html-report \
+    && HOME=/home/go gauge install xml-report \
     && HOME=/home/go gauge install screenshot
 RUN chown -R 997:984 /home/go
 

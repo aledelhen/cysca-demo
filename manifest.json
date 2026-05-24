@@ -3,6 +3,7 @@
   "SpecificationDir": "specs",
   "StepImplementationDir": "step_impl",
   "Plugins": [
-    "html-report"
+    "html-report",
+    "xml-report"
   ]
 }
