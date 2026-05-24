@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
+      PYTHONDONTWRITEBYTECODE: "1"
     volumes:
       - .:/workspace
       - ./reports:/workspace/reports
