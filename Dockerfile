@@ -2,7 +2,8 @@ FROM python:3.11-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    HOME=/home/go
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl gnupg ca-certificates unzip nodejs npm \
@@ -16,7 +17,7 @@ COPY requirements.txt .
 RUN python -m venv /app/.venv \
     && /app/.venv/bin/pip install --no-cache-dir -r requirements.txt
 
-RUN mkdir -p /home/go/.gauge/config \
+RUN mkdir -p /home/go/.gauge/config /home/go/.gauge/plugins /home/go/.gauge/logs \
     && cat > /home/go/.gauge/config/gauge.properties <<'EOF'
 # Version 1.6.21
 # This file contains Gauge specific internal configurations. Do not delete
