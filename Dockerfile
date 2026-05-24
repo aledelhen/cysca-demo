@@ -47,6 +47,9 @@ runner_connection_timeout = 30000
 # Timeout in milliseconds for requests from the language runner.
 runner_request_timeout = 30000
 EOF
+RUN HOME=/home/go gauge install python \
+    && HOME=/home/go gauge install html-report \
+    && HOME=/home/go gauge install screenshot
 RUN chown -R 997:984 /home/go
 
 COPY . .
