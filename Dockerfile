@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     HOME=/home/go
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl gnupg ca-certificates unzip nodejs npm \
+    && apt-get install -y --no-install-recommends curl gnupg ca-certificates unzip nodejs npm gosu \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g @getgauge/cli
@@ -50,4 +50,4 @@ RUN chown -R 997:984 /home/go
 
 COPY . .
 
-CMD ["sh", "-c", "export GAUGE_PYTHON_COMMAND=${GAUGE_PYTHON_COMMAND:-/app/.venv/bin/python} && exec gauge run specs"]
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]

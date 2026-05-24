@@ -3,14 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "997:984"
     working_dir: /workspace
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
-      HOME: /home/go
-      PYTHONPATH: /workspace
     volumes:
       - .:/workspace
       - ./reports:/workspace/reports
       - ./logs:/workspace/logs
-    command: sh -c "exec gauge run specs --env docker"
