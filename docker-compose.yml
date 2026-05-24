@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    user: "${HOST_UID}:${HOST_GID}"
     working_dir: /workspace
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
