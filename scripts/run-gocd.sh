@@ -7,6 +7,9 @@ cleanup() {
 
 trap cleanup EXIT
 
+export HOST_UID="$(id -u)"
+export HOST_GID="$(id -g)"
+
 docker compose up --build --abort-on-container-exit
 
 echo "Post-run report files:"
