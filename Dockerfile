@@ -49,5 +49,6 @@ EOF
 RUN chown -R 997:984 /home/go
 
 COPY . .
+RUN chmod +x /app/scripts/entrypoint.sh
 
 ENTRYPOINT ["/app/scripts/entrypoint.sh"]
