@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    user: "997:984"
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
       PYTHONDONTWRITEBYTECODE: "1"
