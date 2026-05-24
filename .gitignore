@@ -3,6 +3,9 @@ __pycache__/
 .pytest_cache/
 html-report/
 logs/
+!step_impl/cysca_mock/logs/
+!step_impl/cysca_mock/logs/__init__.py
+!step_impl/cysca_mock/logs/system_logs.py
 .gauge/
 .vscode/
 .codex/
