@@ -16,6 +16,16 @@ Starter structure for test automation using the Gauge framework with Python.
 2. Install dependencies.
 3. Run Gauge against the `specs/` directory.
 
+## Git sync
+
+This repo is configured with a local `post-commit` hook that pushes commits to the `local` bare repository automatically.
+
+You can also sync manually with:
+
+```bash
+./scripts/sync-local.sh
+```
+
 ## Docker
 
 Build the image:
@@ -49,6 +59,14 @@ Run a specific spec:
 ```bash
 docker compose run --rm cysca-mock gauge run specs/config_reload.spec
 ```
+
+Run the GoCD-style pipeline entrypoint:
+
+```bash
+./scripts/run-gocd.sh
+```
+
+Use that same script in the GoCD job so the stack starts, the specs run, and the containers are torn down afterward.
 
 ## Codex skill sync
 
