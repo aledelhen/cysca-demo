@@ -3,10 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: "${HOST_UID}:${HOST_GID}"
+    user: "997:984"
     working_dir: /workspace
     environment:
       GAUGE_PYTHON_COMMAND: /app/.venv/bin/python
+      HOME: /home/go
       PYTHONPATH: /workspace
     volumes:
       - .:/workspace

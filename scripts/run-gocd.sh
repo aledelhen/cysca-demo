@@ -7,4 +7,4 @@ cleanup() {
 
 trap cleanup EXIT
 
-HOST_UID="$(id -u)" HOST_GID="$(id -g)" docker compose up --build --abort-on-container-exit
+docker compose up --build --abort-on-container-exit
