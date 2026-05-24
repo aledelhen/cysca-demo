@@ -11,5 +11,3 @@ services:
       - .:/workspace
       - ./reports:/workspace/reports
       - ./logs:/workspace/logs
-      - ./reports:/app/reports
-      - ./logs:/app/logs
