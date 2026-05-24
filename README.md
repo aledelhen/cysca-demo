@@ -67,6 +67,7 @@ Run the GoCD-style pipeline entrypoint:
 ```
 
 Use that same script in the GoCD job so the stack starts, the specs run, and the containers are torn down afterward.
+The GoCD agent workspace at `/var/lib/go-agent/pipelines/demo_suite` must be owned by the `go` user, otherwise the pre-job `git clean -dffx` can fail before the pipeline starts.
 
 ## Codex skill sync
 
