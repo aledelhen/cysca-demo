@@ -10,8 +10,6 @@ trap cleanup EXIT
 export HOST_UID="$(id -u)"
 export HOST_GID="$(id -g)"
 
-./scripts/bootstrap-local-mirror.sh
-
 mkdir -p reports logs
 docker compose up --build --abort-on-container-exit
 

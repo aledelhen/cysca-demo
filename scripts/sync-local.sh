@@ -2,7 +2,7 @@
 set -eu
 
 branch="$(git branch --show-current)"
-remote_url="$(git config --get remote.local.url || true)"
+remote_url="$(git config --get remote.origin.url || true)"
 
 if [ -z "$branch" ]; then
     echo "No current branch detected." >&2
@@ -10,14 +10,8 @@ if [ -z "$branch" ]; then
 fi
 
 if [ -z "$remote_url" ]; then
-    echo "Remote 'local' is not configured." >&2
+    echo "Remote 'origin' is not configured." >&2
     exit 1
 fi
-
-case "$remote_url" in
-    file:///tmp/gocd-repos/demo.git)
-        ./scripts/bootstrap-local-mirror.sh
-        ;;
-esac
 
 git push "$remote_url" "HEAD:${branch}"

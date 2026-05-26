@@ -1,5 +1,4 @@
 #!/bin/sh
 set -eu
 
-./scripts/bootstrap-local-mirror.sh
-git push local HEAD
+git push origin HEAD

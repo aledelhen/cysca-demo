@@ -74,7 +74,7 @@ The matching Mermaid diagrams live in `diagrams/`.
 
 This repository is designed to run in GoCD as well as locally. The pipeline uses the same test entrypoint as the manual run, so the behavior stays aligned between developer machines and the CI agent.
 
-GoCD watches a local bare Git mirror at `file:///tmp/gocd-repos/demo.git` rather than the working tree in this checkout. That mirror is created automatically by the repo scripts and post-commit hook so commits can be pushed into the material that GoCD polls.
+GoCD should watch the GitHub repository directly rather than a local bare mirror. That keeps the pipeline source aligned with the real upstream repo and avoids a separate mirror bootstrap step.
 
 Run the pipeline entrypoint directly:
 
@@ -128,22 +128,13 @@ docker compose run --rm cysca-mock gauge run specs/config_reload.spec
 
 ## Git Sync
 
-The repository is configured with a local `post-commit` hook that pushes commits to the `local` bare repository automatically.
+The repository is configured with a local `post-commit` hook that pushes commits to `origin` automatically.
 
-Manual sync uses the configured local remote URL:
+Manual sync uses the configured `origin` remote URL:
 
 ```bash
 ./scripts/sync-local.sh
 ```
-
-The helper scripts and git hook will create the bare repository on demand:
-
-```bash
-mkdir -p /tmp/gocd-repos
-git init --bare /tmp/gocd-repos/demo.git
-```
-
-This mirror exists so GoCD can poll a stable Git material independently of the developer working tree. It is not the source of truth for the code; it is the transport target that the checkout pushes to for pipeline execution.
 
 ## Codex Skills
 

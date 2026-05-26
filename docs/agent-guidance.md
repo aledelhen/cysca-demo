@@ -35,6 +35,6 @@ gauge run config_reload.spec
 
 ## GoCD material note
 
-- The GoCD pipeline polls `file:///tmp/gocd-repos/demo.git` as a bare mirror, not the working tree in `/home/alaa/Apps/demo`.
-- The repo scripts and post-commit hook bootstrap that mirror automatically so local commits can be pushed into the material GoCD watches.
+- The GoCD pipeline should poll the GitHub repository directly, not a local bare mirror.
+- The repo scripts and post-commit hook push to `origin` so commits flow to the upstream remote used by GoCD.
 - If you are reviewing pipeline behavior, remember that material polling happens before the job scripts run.
