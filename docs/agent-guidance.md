@@ -36,5 +36,4 @@ gauge run config_reload.spec
 ## GoCD material note
 
 - The GoCD pipeline should poll the GitHub repository directly, not a local bare mirror.
-- The repo scripts and post-commit hook push to `origin` so commits flow to the upstream remote used by GoCD.
 - If you are reviewing pipeline behavior, remember that material polling happens before the job scripts run.

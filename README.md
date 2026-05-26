@@ -15,9 +15,16 @@ It is intended to show:
 - `step_impl/`: Python step definitions and supporting domain helpers
 - `docs/`: handoff documentation for reviewers and interviewers
 - `diagrams/`: Mermaid flows that mirror the specs
-- `scripts/`: helper scripts for sync, Docker, and skill installation
+- `scripts/`: shell helpers for runtime and skill installation
 - `env/`: Gauge environment config
 - `skills/`: repo-local Codex skill sources and references
+
+## Script Guide
+
+- Required runtime entrypoint: `scripts/entrypoint.sh`
+- Optional pipeline helper: `scripts/run-gocd.sh`
+- Developer convenience: `scripts/install-codex-skill.sh`
+- Developer convenience: `scripts/install-cysca-qa-skill.sh`
 
 ## Prerequisites
 
@@ -128,13 +135,7 @@ docker compose run --rm cysca-mock gauge run specs/config_reload.spec
 
 ## Git Sync
 
-The repository is configured with a local `post-commit` hook that pushes commits to `origin` automatically.
-
-Manual sync uses the configured `origin` remote URL:
-
-```bash
-./scripts/sync-local.sh
-```
+The repository uses the normal GitHub `origin` remote. Push changes with your standard Git workflow, for example `git push origin <branch>`.
 
 ## Codex Skills
 
