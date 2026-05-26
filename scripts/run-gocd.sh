@@ -10,6 +10,11 @@ trap cleanup EXIT
 export HOST_UID="$(id -u)"
 export HOST_GID="$(id -g)"
 
+mkdir -p /tmp/gocd-repos
+if [ ! -d /tmp/gocd-repos/demo.git ]; then
+    git init --bare /tmp/gocd-repos/demo.git
+fi
+
 mkdir -p reports logs
 docker compose up --build --abort-on-container-exit
 

@@ -14,4 +14,13 @@ if [ -z "$remote_url" ]; then
     exit 1
 fi
 
+case "$remote_url" in
+    file:///tmp/gocd-repos/demo.git)
+        mkdir -p /tmp/gocd-repos
+        if [ ! -d /tmp/gocd-repos/demo.git ]; then
+            git init --bare /tmp/gocd-repos/demo.git
+        fi
+        ;;
+esac
+
 git push "$remote_url" "HEAD:${branch}"
