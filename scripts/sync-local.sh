@@ -16,10 +16,7 @@ fi
 
 case "$remote_url" in
     file:///tmp/gocd-repos/demo.git)
-        mkdir -p /tmp/gocd-repos
-        if [ ! -d /tmp/gocd-repos/demo.git ]; then
-            git init --bare /tmp/gocd-repos/demo.git
-        fi
+        ./scripts/bootstrap-local-mirror.sh
         ;;
 esac
 

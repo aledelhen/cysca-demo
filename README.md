@@ -134,7 +134,7 @@ Manual sync uses the configured local remote URL:
 ./scripts/sync-local.sh
 ```
 
-The helper scripts will create the bare repository on demand, but you can also prepare it manually:
+The helper scripts and git hook will create the bare repository on demand:
 
 ```bash
 mkdir -p /tmp/gocd-repos
