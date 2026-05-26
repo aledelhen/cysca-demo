@@ -74,6 +74,8 @@ The matching Mermaid diagrams live in `diagrams/`.
 
 This repository is designed to run in GoCD as well as locally. The pipeline uses the same test entrypoint as the manual run, so the behavior stays aligned between developer machines and the CI agent.
 
+GoCD watches a local bare Git mirror at `file:///tmp/gocd-repos/demo.git` rather than the working tree in this checkout. That mirror is created automatically by the repo scripts and post-commit hook so commits can be pushed into the material that GoCD polls.
+
 Run the pipeline entrypoint directly:
 
 ```bash
@@ -140,6 +142,8 @@ The helper scripts and git hook will create the bare repository on demand:
 mkdir -p /tmp/gocd-repos
 git init --bare /tmp/gocd-repos/demo.git
 ```
+
+This mirror exists so GoCD can poll a stable Git material independently of the developer working tree. It is not the source of truth for the code; it is the transport target that the checkout pushes to for pipeline execution.
 
 ## Codex Skills
 

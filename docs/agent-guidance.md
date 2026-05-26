@@ -32,3 +32,9 @@ gauge run config_reload.spec
 - Keep shared automation helpers outside the specs.
 - Use the repo-local skill source in `skills/gauge-python-automation/` as the canonical agent guidance.
 - Keep the repo focused on test automation and handoff documentation, not agent-specific noise.
+
+## GoCD material note
+
+- The GoCD pipeline polls `file:///tmp/gocd-repos/demo.git` as a bare mirror, not the working tree in `/home/alaa/Apps/demo`.
+- The repo scripts and post-commit hook bootstrap that mirror automatically so local commits can be pushed into the material GoCD watches.
+- If you are reviewing pipeline behavior, remember that material polling happens before the job scripts run.
