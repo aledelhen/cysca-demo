@@ -20,3 +20,10 @@ This repository includes a Codex skill for QA work on Cysca complex systems.
 - defect analysis and reporting
 - automation prioritization
 
+## Why it matters here
+
+The repo demonstrates how automation can be framed around a real QA mindset:
+
+- focus on system behavior, not isolated steps
+- document risks, dependencies, and recovery behavior
+- keep evidence and traceability easy for reviewers to follow

@@ -1,30 +1,74 @@
-# Gauge Python Starter
+# Cysca QA Demo Repository
 
-Starter structure for test automation using the Gauge framework with Python.
+This repository is a Gauge + Python automation demo tailored to Cysca-style complex systems QA work.
 
-## Layout
+It is intended to show:
 
-- `specs/` Gauge specifications
-- `step_impl/` Python step definitions
-- `skills/` repo-local Codex skill source
-- `scripts/` helper scripts, including skill installation
-- `env/` environment hooks and configuration
+- how we structure executable specs around system behavior
+- how we keep step logic small and testable
+- how we document setup and execution for local, Docker, and pipeline use
+- how we connect test automation to risk-based QA thinking
 
-## Getting started
+## Repository Map
 
-1. Create a virtual environment.
-2. Install dependencies.
-3. Run Gauge against the `specs/` directory.
+- `specs/`: Gauge specifications
+- `step_impl/`: Python step definitions and supporting domain helpers
+- `docs/`: handoff documentation for reviewers and interviewers
+- `diagrams/`: Mermaid flows that mirror the specs
+- `scripts/`: helper scripts for sync, Docker, and skill installation
+- `env/`: Gauge environment config
+- `skills/`: repo-local Codex skill sources and references
 
-## Git sync
+## Prerequisites
 
-This repo is configured with a local `post-commit` hook that pushes commits to the `local` bare repository automatically.
+- Python 3.12
+- `pip`
+- Gauge CLI
+- Docker and Docker Compose for containerized runs
+- `direnv` if you want automatic local venv activation
 
-You can also sync manually with:
+## Local Setup
+
+1. Create and activate a virtual environment:
 
 ```bash
-./scripts/sync-local.sh
+python3 -m venv .venv
+source .venv/bin/activate
 ```
+
+1. Install Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+1. Install Gauge if it is not already available on your PATH.
+1. Run the specs from the project root:
+
+```bash
+gauge run specs
+```
+
+To run a single spec:
+
+```bash
+cd specs
+gauge run config_reload.spec
+```
+
+If a Gauge run fails, inspect `logs/gauge.log` first.
+
+## Validation Coverage
+
+Current specs cover the main demo flows:
+
+- `device_handshake.spec`
+- `system_boot.spec`
+- `config_reload.spec`
+- `fault_recovery.spec`
+- `telemetry_trace.spec`
+
+The matching Mermaid diagrams live in `diagrams/`.
 
 ## Docker
 
@@ -60,18 +104,38 @@ Run a specific spec:
 docker compose run --rm cysca-mock gauge run specs/config_reload.spec
 ```
 
-Run the GoCD-style pipeline entrypoint:
+## GoCD-Style Execution
+
+Run the same entrypoint the pipeline uses:
 
 ```bash
 ./scripts/run-gocd.sh
 ```
 
-Use that same script in the GoCD job so the stack starts, the specs run, and the containers are torn down afterward.
+That script starts the stack, runs the specs, and tears the containers down afterward.
+
 The GoCD agent workspace at `/var/lib/go-agent/pipelines/demo_suite` must be owned by the `go` user, otherwise the pre-job `git clean -dffx` can fail before the pipeline starts.
 
-## Codex skill sync
+## Git Sync
 
-Install the project skill into your local Codex home:
+The repository is configured with a local `post-commit` hook that pushes commits to the `local` bare repository automatically.
+
+Manual sync uses the configured local remote URL:
+
+```bash
+./scripts/sync-local.sh
+```
+
+If you are preparing a fresh local mirror for demo use, create the bare repository first:
+
+```bash
+mkdir -p /tmp/gocd-repos
+git init --bare /tmp/gocd-repos/demo.git
+```
+
+## Codex Skills
+
+Install the repo skill into your local Codex home:
 
 ```bash
 ./scripts/install-codex-skill.sh
