@@ -70,6 +70,26 @@ Current specs cover the main reference flows:
 
 The matching Mermaid diagrams live in `diagrams/`.
 
+## GoCD Pipeline
+
+This repository is designed to run in GoCD as well as locally. The pipeline uses the same test entrypoint as the manual run, so the behavior stays aligned between developer machines and the CI agent.
+
+Run the pipeline entrypoint directly:
+
+```bash
+./scripts/run-gocd.sh
+```
+
+That script starts the stack, runs the specs, and tears the containers down afterward.
+
+GoCD prerequisites:
+
+- the pipeline workspace at `/var/lib/go-agent/pipelines/demo_suite` must be owned by the `go` user
+- the checkout must be clean before the job starts
+- Docker must be available to the agent
+
+If you are reviewing the project from the pipeline side, this is the execution path to follow first.
+
 ## Docker
 
 Build the image:
@@ -103,18 +123,6 @@ Run a specific spec:
 ```bash
 docker compose run --rm cysca-mock gauge run specs/config_reload.spec
 ```
-
-## GoCD-Style Execution
-
-Run the same entrypoint the pipeline uses:
-
-```bash
-./scripts/run-gocd.sh
-```
-
-That script starts the stack, runs the specs, and tears the containers down afterward.
-
-The GoCD agent workspace at `/var/lib/go-agent/pipelines/demo_suite` must be owned by the `go` user, otherwise the pre-job `git clean -dffx` can fail before the pipeline starts.
 
 ## Git Sync
 
