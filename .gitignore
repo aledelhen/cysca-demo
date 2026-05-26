@@ -1,6 +1,7 @@
 .venv/
 __pycache__/
 .pytest_cache/
+reports/
 logs/
 !step_impl/cysca_mock/logs/
 !step_impl/cysca_mock/logs/__init__.py
