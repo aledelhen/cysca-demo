@@ -64,7 +64,20 @@ That gives a cleaner separation:
 
 This separation keeps the test suite easier to maintain as the system grows.
 
-### 4. It supports living documentation
+### 4. It supports collaboration across teams
+
+Gauge helps QA, developers, embedded engineers, and reviewers work from the same executable specification.
+
+That makes the spec layer a shared contract instead of a QA-only artifact:
+
+- QA can express behavior in a readable form
+- developers can trace failures back to implementation quickly
+- embedded and systems engineers can review the intended system flow without learning a separate keyword DSL
+- stakeholders can review behavior in a format that stays close to the product intent
+
+This is especially useful in complex systems where alignment between teams matters as much as automation coverage.
+
+### 5. It supports living documentation
 
 Gauge specs can act as:
 
@@ -75,7 +88,7 @@ Gauge specs can act as:
 
 That is useful in complex systems where documentation drift becomes a real risk.
 
-### 5. It scales better for complex integration work
+### 6. It scales better for complex integration work
 
 This repository is intended to represent validation work that may involve:
 
