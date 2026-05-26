@@ -99,6 +99,10 @@ GoCD prerequisites:
 
 If you are reviewing the project from the pipeline side, this is the execution path to follow first.
 
+## Framework Choice
+
+If you need the rationale for using Gauge instead of Robot Framework in this repository, see [docs/gauge-vs-robot-framework.md](/home/alaa/Apps/demo/docs/gauge-vs-robot-framework.md).
+
 ## Docker
 
 Build the image:
