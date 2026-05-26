@@ -7,7 +7,7 @@ metadata:
 
 # Gauge Python Automation
 
-Use this skill when working in the `~/Apps/demo` Gauge/Python project.
+Use this skill when working in this Gauge/Python project.
 
 ## Scope
 
@@ -35,7 +35,7 @@ This project is a Gauge test automation repo. Prefer the existing project struct
 
 - Keep steps small and explicit.
 - Put shared browser/UI helpers in future `pages/` or helper modules, not in specs.
-- Keep example/demo steps minimal unless the user asks for a fuller framework scaffold.
+- Keep example steps minimal unless the user asks for a fuller framework scaffold.
 
 ## Environment assumptions
 

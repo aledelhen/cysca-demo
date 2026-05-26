@@ -1,4 +1,4 @@
-# Cysca QA Demo Repository
+# Cysca Demo
 
 This repository is a Gauge + Python automation demo tailored to Cysca-style complex systems QA work.
 
@@ -60,7 +60,7 @@ If a Gauge run fails, inspect `logs/gauge.log` first.
 
 ## Validation Coverage
 
-Current specs cover the main demo flows:
+Current specs cover the main reference flows:
 
 - `device_handshake.spec`
 - `system_boot.spec`
@@ -126,7 +126,7 @@ Manual sync uses the configured local remote URL:
 ./scripts/sync-local.sh
 ```
 
-If you are preparing a fresh local mirror for demo use, create the bare repository first:
+If you are preparing a fresh local mirror for development use, create the bare repository first:
 
 ```bash
 mkdir -p /tmp/gocd-repos
